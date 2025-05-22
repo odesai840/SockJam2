@@ -29,10 +29,16 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        // movement
         inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         inputVector = Vector2.ClampMagnitude(inputVector, 1f);
-
         mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, new Vector3(player.position.x, player.position.y, camZAxis), camSpeed * Time.deltaTime);
+    
+        // kick
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Debug.LogWarning("KICK");
+        }
     }
 
     void FixedUpdate()
