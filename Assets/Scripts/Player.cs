@@ -77,6 +77,7 @@ public class Player : MonoBehaviour
             rb.linearVelocity = new Vector2(inputVector.x, inputVector.y);  
         }
     }
+
     void Dash()
     {
         rb.AddForce(lastInputVector.normalized * dashDistance, ForceMode2D.Force);
