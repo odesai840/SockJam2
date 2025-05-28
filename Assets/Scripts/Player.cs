@@ -23,6 +23,11 @@ public class Player : MonoBehaviour
     public float camZAxis = -100.0f;
     public float camSpeed = 4.0f;
 
+    // health
+    [Header("Health")]
+    public int maxHealth = 10;
+    private int currentHealth;
+
     // dash 
     [Header("Dash")]
     public float dashDistance = 50.0f;
@@ -32,17 +37,39 @@ public class Player : MonoBehaviour
     public float dashShakeDuration = 0.1f;
     private bool canDash = true;
 
+    // checkpoint
+    [HideInInspector] public Checkpoint checkpoint;
+
     void Start()
     {
         canMove = true;
         canDash = true;
 
+        currentHealth = maxHealth;
+
         mainCamera = GameObject.Find("PlayerCamera");
         player = GameObject.Find("Player").transform;
+
+        // testing
+        checkpoint = GameObject.Find("Checkpoint0").GetComponent<Checkpoint>();
+
+        player.position = checkpoint.transform.position;
     }
 
     void Update()
     {
+        // testing death and checkpoints
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            TakeDamage(1);
+            Debug.Log("Current Health: " + currentHealth);
+        }
+
+        if (currentHealth <= 0)
+        {
+            Death();
+        }
+
         // movement
         inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         inputVector = Vector2.ClampMagnitude(inputVector, 1f);
@@ -55,9 +82,9 @@ public class Player : MonoBehaviour
         // kick
         if (Input.GetKeyDown(KeyCode.F))
         {
-            Debug.LogWarning("KICK");
+            Debug.Log("KICK");
         }
-        
+
         // dash
         if (canDash && Input.GetKeyDown(KeyCode.Space))
         {
@@ -74,7 +101,7 @@ public class Player : MonoBehaviour
         if (canMove)
         {
             inputVector *= moveSpeed * Time.deltaTime * 100.0f;
-            rb.linearVelocity = new Vector2(inputVector.x, inputVector.y);  
+            rb.linearVelocity = new Vector2(inputVector.x, inputVector.y);
         }
     }
 
@@ -83,6 +110,18 @@ public class Player : MonoBehaviour
         rb.AddForce(lastInputVector.normalized * dashDistance, ForceMode2D.Force);
         StartCoroutine(ScreenShake(dashShakeDuration, dashShakeIntensity));
         StartCoroutine(WaitForDashEnd(dashDuration));
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+    }
+
+    void Death()
+    {
+        Debug.Log("DIED");
+        player.position = checkpoint.transform.position;
+        currentHealth = maxHealth;
     }
 
     IEnumerator WaitForDashEnd(float duration)
