@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     private Vector2 inputVector;
     private Vector2 lastInputVector;
     private bool canMove = true;
+    public float speedMultiplier = 1.0f;
 
     // camera
     [Header("Camera")]
@@ -103,7 +104,7 @@ public class Player : MonoBehaviour
     {
         if (canMove)
         {
-            inputVector *= moveSpeed * Time.deltaTime * 100.0f;
+            inputVector *= moveSpeed * speedMultiplier * Time.deltaTime * 100.0f;
             rb.linearVelocity = new Vector2(inputVector.x, inputVector.y);
         }
     }
