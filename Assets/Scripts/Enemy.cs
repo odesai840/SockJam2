@@ -27,32 +27,8 @@ public class Enemy : MonoBehaviour
     [Tooltip("Radius of circle that police AI will check for collisions")]
     public float checkRadius = 0.5f;
 
-    //For Attacking
-    private bool canSimplePathfind = false;
-    private bool canAttack = false;
-    private bool isAttacking = false;
-    [Tooltip("This should be the same amount of time the attack animation takes")]
-    public float attackLengthInSeconds;
-
-    //For Fleeing
-    [Tooltip("Amount of time the enemy will flee after attacking")]
-    public float fleeTimer;
-    private bool isFleeing;
-
-    public float stopDistanceFromPlayer;
-
-    public enum AIState
-    {
-        BaseState, // doing nothing
-        Chasing, // pathing and moving towards player
-        Attacking,  // doing attack
-        Fleeing // moving away from the player , might not use
-    }
-    AIState aistate = AIState.BaseState;
-
     // Movement things
     [SerializeField] private float moveSpeed = 15f;
-    private float startMoveSpeed;
     private int currentWaypointIndex = 0;
 
     // Collision things
@@ -80,79 +56,16 @@ public class Enemy : MonoBehaviour
         playerCollider = player.GetComponent<Collider2D>();
         selfCollider = GetComponent<Collider2D>();
 
-        startMoveSpeed = moveSpeed;
-
-        aistate = AIState.Chasing; 
-
-        
+        CheckPlayerLocation();
+        //DeleteAllWaypoints(); // TESTING
+        Pathfind();
     }
 
     void Update()
     {
-        CheckPlayerLocation();
-        DeleteAllWaypoints(); // TESTING
-        CheckCanSimplePathfind();
-
-        if (aistate == AIState.Chasing)                 // Chase Code
-        {
-
-            Debug.Log("Chasing");
-
-            moveSpeed = startMoveSpeed;
-
-            if (canSimplePathfind)
-            {
-                SimplePathfind();
-            }
-            else
-            {
-                Pathfind();
-            }
-
-        } 
-        else if (aistate == AIState.Attacking)        // Attack Code
-        {
-            Debug.Log("Attacking");
-            moveSpeed = 0;
-
-            if (canAttack)
-            {
-                if (!isAttacking)
-                {
-                    // Trigger actual attack here
-                    UseAttack();
-                    StartCoroutine(WaitforAttackAnimation(attackLengthInSeconds));
-                }
-            }
-        } 
-        else if (aistate == AIState.Fleeing)          // Flee Code
-        {
-            Debug.Log("Fleeing");
-            moveSpeed = startMoveSpeed / 2;
-
-            Flee();
-
-            if (!isFleeing)
-            {
-                StartCoroutine(FleeTimer(fleeTimer));
-            }
-            
-        } 
-        else if (aistate == AIState.BaseState)        // Do Nothing Code
-        {
-            moveSpeed = 0;
-        }
-
-        
-
-        if (Vector2.Distance(rb.transform.position, player.transform.position) <= stopDistanceFromPlayer && !isFleeing)
-        {
-            
-            aistate = AIState.Attacking;
-            canAttack = true;
-
-        } 
-
+        //CheckPlayerLocation();
+        //DeleteAllWaypoints(); // TESTING
+        //Pathfind();
     }
 
     void FixedUpdate()
@@ -160,11 +73,7 @@ public class Enemy : MonoBehaviour
         lineRenderer.positionCount = (int)(distanceToPlayer / rayCastDistance); // draw more points for higher accuracy
         //UnityEngine.Debug.Log(lineRenderer.positionCount);
         pointsOnLine = lineRenderer.positionCount;
-        if (!canSimplePathfind && aistate == AIState.Chasing) 
-        {
-            MoveAlongWaypoints();
-        }
-       
+        //MoveAlongWaypoints();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -207,6 +116,26 @@ public class Enemy : MonoBehaviour
     }
     */
 
+    private void MoveAlongWaypoints()
+    {
+        if (currentWaypointIndex >= wayPoints.Count) return;
+
+        Vector2 targetPosition = wayPoints[currentWaypointIndex];
+
+        // Move toward the current waypoint
+        Vector2 moveDirection = (targetPosition - rb.position).normalized;
+        rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
+
+        // Rotate the police AI to face the player
+        float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+        rb.rotation = angle - 90f;  // Adjust for sprite rotation
+
+        // Check if the police AI reached the waypoint
+        if (Vector2.Distance(rb.position, targetPosition) <= 0.1)
+        {
+            currentWaypointIndex++;
+        }
+    }
 
     private void CheckPlayerLocation()
     {
@@ -216,70 +145,12 @@ public class Enemy : MonoBehaviour
         dirToPlayer = (playerPosition - rb.position).normalized;
     }
 
-
-                                                                    //Pathfinding and Chasing// V V V V V
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private void MoveAlongWaypoints()
-    {
-        if (currentWaypointIndex >= wayPoints.Count) return;
-
-        Vector2 targetPosition = wayPoints[currentWaypointIndex];
-
-        // Move toward the current waypoint
-        Vector2 moveDirection = (targetPosition - rb.position).normalized;
-        
-        rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
-
-        // Check if the police AI reached the waypoint
-        if (Vector2.Distance(rb.position, targetPosition) <= 0.2)
-        {
-            currentWaypointIndex++;
-        }
-    }
-
-    
-
-    private void CheckCanSimplePathfind()
-    {
-
-        CheckPlayerLocation();
-
-        RaycastHit2D hit = Physics2D.Raycast(rb.position, playerPosition, distanceToPlayer);
-
-        if (hit.collider != null && hit.collider.gameObject != player && hit.collider.gameObject != rb)
-        {
-            canSimplePathfind = false;
-        }
-        else   
-        { 
-            canSimplePathfind = true;
-        }
-    }
-       
-    private void SimplePathfind()
-    {
-        Vector2 targetPosition = player.transform.position;
-
-        // Move toward the current waypoint
-        Vector2 moveDirection = (targetPosition - rb.position).normalized;
-
-        if (Vector2.Distance(rb.transform.position, player.transform.position) < stopDistanceFromPlayer)
-        {
-            rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
-        }
-        
-    }
-
     private void Pathfind()
     {
         wayPoints.Clear(); // Clear the list of waypoints
 
         int wayPointsNeeded = (int)(distanceToPlayer / rayCastDistance); // Number of waypoints needed
-
+        Debug.Log("Waypoints needed: " + wayPointsNeeded);
         Vector2 rayCastEndpoint = rb.position + dirToPlayer * rayCastDistance; // Start position
         wayPoints.Add(rayCastEndpoint); // Add start position to the list
 
@@ -333,19 +204,18 @@ public class Enemy : MonoBehaviour
                     wayPoints.Add(rayCastEndpoint);
                     foundClearPath = true;
                 }
-                else if (!hitRight) // Only the right direction is clear
-                {
-                    rayCastEndpoint = possibleRightTurn;
-                    wayPoints.Add(rayCastEndpoint);
-                    foundClearPath = true;
-                }
                 else if (!hitLeft) // Only the left direction is clear
                 {
                     rayCastEndpoint = possibleLeftTurn;
                     wayPoints.Add(rayCastEndpoint);
                     foundClearPath = true;
                 }
-                
+                else if (!hitRight) // Only the right direction is clear
+                {
+                    rayCastEndpoint = possibleRightTurn;
+                    wayPoints.Add(rayCastEndpoint);
+                    foundClearPath = true;
+                }
                 else // If both directions are blocked, continue adjusting angles
                 {
                     angleOffsetLeft += angleStep;
@@ -362,8 +232,8 @@ public class Enemy : MonoBehaviour
                     waypointObjects.Add(waypoint);
                 }
             }
-            //Debug.Log("Way Point #" + (wayPoints.Count-1));
-            //Debug.Log("--------Way Point X: " + wayPoints[wayPoints.Count-1].x + "     Way Point Y: " + wayPoints[wayPoints.Count - 1].y);
+            Debug.Log("Way Point #" + (wayPoints.Count-1));
+            Debug.Log("--------Way Point X: " + wayPoints[wayPoints.Count-1].x + "     Way Point Y: " + wayPoints[wayPoints.Count - 1].y);
         }
     }
 
@@ -377,72 +247,4 @@ public class Enemy : MonoBehaviour
 
         waypointObjects.Clear();
     }
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-                                                                                //Attacking// V V V V V
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    IEnumerator WaitforAttackAnimation(float delay) 
-    {
-        isAttacking = true;
-        yield return new WaitForSeconds(delay);
-        aistate = AIState.Fleeing;
-        isAttacking = false;
-    }
-
-    private void UseAttack()
-    {
-        WaterBucketAttack waterAttack = GetComponent<WaterBucketAttack>();
-        waterAttack.SpillBucketAttack();
-    }
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-                                                                            //Fleeing// V V V V V
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    IEnumerator FleeTimer(float fleeTime)
-    {
-        isFleeing = true;
-        yield return new WaitForSeconds(fleeTime);
-        aistate = AIState.Chasing;
-        isFleeing = false;
-    }
-
-    private void Flee()
-    {
-        Pathfind();
-        MoveAlongWaypointsOpposite();
-    }
-
-    private void MoveAlongWaypointsOpposite()
-    {
-        if (currentWaypointIndex >= wayPoints.Count) return;
-
-        Vector2 targetPosition = wayPoints[currentWaypointIndex];
-
-        // Move toward the current waypoint
-        Vector2 moveDirection = (targetPosition - rb.position).normalized;
-
-        rb.MovePosition(rb.position + -moveDirection * moveSpeed * Time.fixedDeltaTime);
-
-        // Check if the police AI reached the waypoint
-        if (Vector2.Distance(rb.position, targetPosition) <= 0.2)
-        {
-            currentWaypointIndex++;
-        }
-    }
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
