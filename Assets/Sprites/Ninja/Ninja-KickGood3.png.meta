@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3c8bdb12736107b4e970f28d34e26e92
+guid: e071b861e0f566345846ecaef378831e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4334783836991956000
-    second: player_0
+      213: 5354123545261194056
+    second: Ninja-KickGood3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_0
+      name: Ninja-KickGood3_0
       rect:
         serializedVersion: 2
-        x: 4
+        x: 7
         y: 0
-        width: 24
-        height: 31
+        width: 20
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 024a20edeee382c30800000000000000
-      internalID: 4334783836991956000
+      spriteID: 84b39de3ffaad4a40800000000000000
+      internalID: 5354123545261194056
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      player_0: 4334783836991956000
+      Ninja-KickGood3_0: 5354123545261194056
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

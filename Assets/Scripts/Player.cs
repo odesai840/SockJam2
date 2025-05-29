@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 {
     private GameObject mainCamera;
     private Transform player;
+    private Animator animator;
 
     // movement
     [Header("Movement")]
@@ -49,6 +50,7 @@ public class Player : MonoBehaviour
 
         mainCamera = GameObject.Find("PlayerCamera");
         player = GameObject.Find("Player").transform;
+        animator = player.GetComponent<Animator>();
 
         // testing
         checkpoint = GameObject.Find("Checkpoint0").GetComponent<Checkpoint>();
@@ -83,6 +85,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             Debug.Log("KICK");
+            animator.SetTrigger("kick");
         }
 
         // dash

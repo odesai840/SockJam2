@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Water Bucket Splash Zone Inner_0: -8120026409085009691
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

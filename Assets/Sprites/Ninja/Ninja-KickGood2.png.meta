@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: aea72cd272e55ab4188eb33e6aa478a5
+guid: 7cf473837ad76544a877a5def5090b70
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1654522581610634675
-    second: bucketenemylava_0
+      213: -535404002393531513
+    second: Ninja-KickGood2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bucketenemylava_0
+      name: Ninja-KickGood2_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 1
-        width: 28
-        height: 30
+        x: 6
+        y: 0
+        width: 22
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d426c326a74f909e0800000000000000
-      internalID: -1654522581610634675
+      spriteID: 78bd20285ecd198f0800000000000000
+      internalID: -535404002393531513
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bucketenemylava_0: -1654522581610634675
+      Ninja-KickGood2_0: -535404002393531513
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
