@@ -817,6 +817,7 @@ MonoBehaviour:
   dashShakeIntensity: 0.075
   dashShakeDuration: 0.1
   checkpoint: {fileID: 0}
+<<<<<<< Updated upstream:Assets/Scenes/test scene.unity
 --- !u!1 &668538906
 GameObject:
   m_ObjectHideFlags: 0
@@ -3225,6 +3226,8 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+=======
+>>>>>>> Stashed changes:Assets/Scenes/sockjam2.unity
 --- !u!1 &1628357304
 GameObject:
   m_ObjectHideFlags: 0
@@ -4852,12 +4855,97 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &4868756675857192295
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2217787253165134626, guid: f687faf2ff3463844a6ae07374ce1e4a, type: 3}
+      propertyPath: m_Name
+      value: WaterBucketEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7439318915734782646, guid: f687faf2ff3463844a6ae07374ce1e4a, type: 3}
+      propertyPath: stopDistanceFromPlayer
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7923953464622044613, guid: f687faf2ff3463844a6ae07374ce1e4a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 7923953464622044613, guid: f687faf2ff3463844a6ae07374ce1e4a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 7923953464622044613, guid: f687faf2ff3463844a6ae07374ce1e4a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7923953464622044613, guid: f687faf2ff3463844a6ae07374ce1e4a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7923953464622044613, guid: f687faf2ff3463844a6ae07374ce1e4a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7923953464622044613, guid: f687faf2ff3463844a6ae07374ce1e4a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7923953464622044613, guid: f687faf2ff3463844a6ae07374ce1e4a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7923953464622044613, guid: f687faf2ff3463844a6ae07374ce1e4a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7923953464622044613, guid: f687faf2ff3463844a6ae07374ce1e4a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7923953464622044613, guid: f687faf2ff3463844a6ae07374ce1e4a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003054466908859722, guid: f687faf2ff3463844a6ae07374ce1e4a, type: 3}
+      propertyPath: fadeTimer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003054466908859722, guid: f687faf2ff3463844a6ae07374ce1e4a, type: 3}
+      propertyPath: spillTimer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003054466908859722, guid: f687faf2ff3463844a6ae07374ce1e4a, type: 3}
+      propertyPath: waterPrefabs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003054466908859722, guid: f687faf2ff3463844a6ae07374ce1e4a, type: 3}
+      propertyPath: 'waterPrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 3768851089739955450, guid: 23dd013e1ce0cb74dbf4735be65c199b, type: 3}
+    - target: {fileID: 9003054466908859722, guid: f687faf2ff3463844a6ae07374ce1e4a, type: 3}
+      propertyPath: 'waterPrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 4385986316950934798, guid: 79bd7d3199ffbfe46b539053fc8185d4, type: 3}
+    - target: {fileID: 9003054466908859722, guid: f687faf2ff3463844a6ae07374ce1e4a, type: 3}
+      propertyPath: 'waterPrefabs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 7442447716739081569, guid: 8e55d79180f2d98468c2ce6e7af7f2f2, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f687faf2ff3463844a6ae07374ce1e4a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 648657227}
-  - {fileID: 1159284128}
+  - {fileID: 4868756675857192295}
   - {fileID: 641847905}
   - {fileID: 488884663}
   - {fileID: 971361367}
