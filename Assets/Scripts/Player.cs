@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 
 public class Player : MonoBehaviour
 {
-    private GameObject mainCamera;
+    private Camera mainCamera;
     private Transform player;
     private Animator animator;
 
@@ -38,6 +38,10 @@ public class Player : MonoBehaviour
     public float dashShakeIntensity = 0.2f;
     public float dashShakeDuration = 0.1f;
     private bool canDash = true;
+    
+    // attacks
+    [Header("Attacks")]
+    [SerializeField] private GameObject rangedProjectile;
 
     // checkpoint
     [HideInInspector] public Checkpoint checkpoint;
@@ -49,7 +53,7 @@ public class Player : MonoBehaviour
 
         currentHealth = maxHealth;
 
-        mainCamera = GameObject.Find("PlayerCamera");
+        mainCamera = Camera.main;
         player = GameObject.Find("Player").transform;
         animator = player.GetComponent<Animator>();
 
@@ -83,10 +87,28 @@ public class Player : MonoBehaviour
         }
 
         // kick
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("KICK");
             animator.SetTrigger("kick");
+        }
+        
+        // ranged attack
+        if(Input.GetMouseButtonDown(1))
+        {
+            Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 playerPos2D = new Vector2(player.position.x, player.position.y);
+            Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+            Vector2 direction2D = (mousePos2D - playerPos2D).normalized;
+            Vector3 direction = new Vector3(direction2D.x, direction2D.y, 0);
+            GameObject shuriken = Instantiate(rangedProjectile, player.position, Quaternion.identity);
+            
+            Shuriken shurikenScript = shuriken.GetComponent<Shuriken>();
+            if (shurikenScript != null)
+            {
+                shurikenScript.Initialize(direction);
+            }
+            Debug.DrawLine(shuriken.transform.position, shuriken.transform.position + direction * 5f, Color.red, 2f);
         }
 
         // dash
@@ -102,10 +124,21 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        FlipPlayerSprite();
         if (canMove)
         {
             inputVector *= moveSpeed * speedMultiplier * Time.deltaTime * 100.0f;
             rb.linearVelocity = new Vector2(inputVector.x, inputVector.y);
+        }
+    }
+    
+    private void FlipPlayerSprite(){
+        Vector3 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+
+        if(mousePos.x < player.position.x){
+            player.GetComponent<SpriteRenderer>().flipX = true;
+        } else{
+            player.GetComponent<SpriteRenderer>().flipX = false;
         }
     }
 

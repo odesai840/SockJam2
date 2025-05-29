@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0297e54def962e549a1a5d9db594ba55
+guid: dd8f8525eb0fe9a43bfa69914f39313b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6231308910345765914
-    second: LavaBeam1_0
+      213: 6812845342883300267
+    second: bucketenemypoison_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LavaBeam1_0
+      name: bucketenemypoison_0
       rect:
         serializedVersion: 2
-        x: 5
+        x: 2
         y: 1
-        width: 150
-        height: 31
+        width: 28
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a14c2e6607e0a7650800000000000000
-      internalID: 6231308910345765914
+      spriteID: ba3cb3c4eb61c8e50800000000000000
+      internalID: 6812845342883300267
       vertices: []
       indices: 
       edges: []
@@ -160,8 +160,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      LavaBeam1_0: 6231308910345765914
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

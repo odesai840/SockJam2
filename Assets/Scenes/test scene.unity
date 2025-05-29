@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 290686684}
   - component: {fileID: 290686685}
   - component: {fileID: 290686686}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 99
-  m_Sprite: {fileID: 4334783836991956000, guid: 3c8bdb12736107b4e970f28d34e26e92, type: 3}
+  m_Sprite: {fileID: -954880015180449723, guid: 733071d9dc487f447883540cd334d388, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -231,7 +231,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 316179442}
   - component: {fileID: 316179441}
   - component: {fileID: 316179440}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -415,7 +415,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -793,7 +793,7 @@ GameObject:
   m_Component:
   - component: {fileID: 648657227}
   - component: {fileID: 648657228}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerContainer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -840,6 +840,7 @@ MonoBehaviour:
   dashDuration: 0.1
   dashShakeIntensity: 0.075
   dashShakeDuration: 0.1
+  rangedProjectile: {fileID: 1609488975480095040, guid: ac91f8e30165f8f4395dd315248a2f10, type: 3}
   checkpoint: {fileID: 0}
 --- !u!1 &668538906
 GameObject:
