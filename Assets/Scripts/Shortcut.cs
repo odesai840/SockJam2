@@ -10,6 +10,7 @@ public class Shortcut : MonoBehaviour
         {
             blockage.enabled = false;
             blockage.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            blockage.transform.GetComponentInChildren<SpriteRenderer>().enabled = false;
         }
     }
 }

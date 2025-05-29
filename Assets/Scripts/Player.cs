@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
         }
 
         // dash
-        if (canDash && Input.GetKeyDown(KeyCode.Space))
+        if (canDash && speedMultiplier == 1.0f && Input.GetKeyDown(KeyCode.Space))
         {
             canDash = false;
             Dash();
