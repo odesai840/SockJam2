@@ -963,6 +963,7 @@ GameObject:
   - component: {fileID: 1159284130}
   - component: {fileID: 1159284131}
   - component: {fileID: 1159284132}
+  - component: {fileID: 1159284133}
   m_Layer: 0
   m_Name: WaterBucketEnemy
   m_TagString: Untagged
@@ -1228,8 +1229,31 @@ MonoBehaviour:
   maxIterations: 30
   rayCastDistance: 1
   checkRadius: 0.5
-  moveSpeed: 0
+  attackLengthInSeconds: 10
+  fleeTimer: 8
+  stopDistanceFromPlayer: 1.5
+  moveSpeed: 2.5
   waypointCircle: {fileID: 2842062414124853007, guid: 615a448e139c5194bb6e4edcbf6e465d, type: 3}
+--- !u!114 &1159284133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159284126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd8ac665eb6838141be5db8bfcd11321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeTimer: 3
+  spillTimer: 1
+  fadeTimer: 4
+  shakingIntensity: 0.03
+  waterPrefabs:
+  - {fileID: 6941222345356713362, guid: 23dd013e1ce0cb74dbf4735be65c199b, type: 3}
+  - {fileID: 6212531519544519912, guid: a13df8a8b4f07b344a35997015d52319, type: 3}
+  - {fileID: 1894061063844244339, guid: 8e55d79180f2d98468c2ce6e7af7f2f2, type: 3}
 --- !u!1 &1391431831
 GameObject:
   m_ObjectHideFlags: 0
@@ -3120,7 +3144,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -3169,10 +3193,10 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 7c8e521f215712547a42ed14adb389a7, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 1
-    m_Data: {fileID: -46564774, guid: 72a8d51605e2ac249993c86c7188f4c0, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -46564774, guid: 72a8d51605e2ac249993c86c7188f4c0, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -592258309, guid: 72a8d51605e2ac249993c86c7188f4c0, type: 3}
   - m_RefCount: 1
