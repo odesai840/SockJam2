@@ -5,6 +5,10 @@ public class LavaBucketAttack : MonoBehaviour
 {
     private GameObject player;
     public GameObject lavaBeam;
+    private Vector3 directionToPlayer;
+    private Vector3 startDirectionToPlayer;
+
+    private GameObject lava;
 
     private Rigidbody2D rb;
 
@@ -13,6 +17,8 @@ public class LavaBucketAttack : MonoBehaviour
     public float attackTimer;
     [Tooltip("How much enemy/lava will shake")]
     public float shakingIntensity;
+
+    private float rotationSpeed = 30f;
 
     AttackPhase phase;
 
@@ -33,9 +39,25 @@ public class LavaBucketAttack : MonoBehaviour
 
     private void Update()
     {
+        directionToPlayer = (player.transform.position - rb.transform.position).normalized;
+
         if (phase == AttackPhase.Attack)
         {
+            if (lava == null) return;
 
+            // Direction to the player
+            Vector3 direction = player.transform.position - rb.transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 180f;
+
+            // Target rotation as a Quaternion
+            Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
+
+            // Smoothly rotate towards the target
+            lava.transform.rotation = Quaternion.RotateTowards(
+                lava.transform.rotation,
+                targetRotation,
+                rotationSpeed * Time.deltaTime
+            );
         }
     }
 
@@ -51,7 +73,9 @@ public class LavaBucketAttack : MonoBehaviour
         {
             //spawn lava here
             Vector2 lavaSpawnPoint = rb.transform.position;
-            GameObject lava = Instantiate(lavaBeam, lavaSpawnPoint, Quaternion.identity);
+            //lava = Instantiate(lavaBeam, lavaSpawnPoint, Quaternion.identity);
+
+            StartCoroutine(AttackDelay(.05f));
             StartCoroutine(AttackTimer(attackTimer, lava));
         }
 
@@ -95,6 +119,36 @@ public class LavaBucketAttack : MonoBehaviour
         yield return new WaitForSeconds(attackTimer);
         Destroy(lava);
         phase = AttackPhase.None;
+    }
+
+    IEnumerator AttackDelay(float delay)
+    {
+        startDirectionToPlayer = (player.transform.position - rb.transform.position).normalized;
+
+        yield return new WaitForSeconds(delay);
+
+        Vector2 lavaSpawnPoint = rb.transform.position;
+
+        // Base angle towards player
+        float baseAngle = Mathf.Atan2(startDirectionToPlayer.y, startDirectionToPlayer.x) * Mathf.Rad2Deg;
+
+        // Add a ±20 degree offset
+        float offsetAngle = baseAngle + Random.Range(35f, 35f);
+
+        // Convert offset angle back to a direction
+        Vector2 shootDirection = new Vector2(Mathf.Cos(offsetAngle * Mathf.Deg2Rad), Mathf.Sin(offsetAngle * Mathf.Deg2Rad));
+
+        // Spawn the lava with the correct rotation
+        lava = Instantiate(lavaBeam, lavaSpawnPoint, Quaternion.Euler(0, 0, offsetAngle + 180));
+
+        // Apply velocity if using Rigidbody2D
+        Rigidbody2D lavaRb = lava.GetComponent<Rigidbody2D>();
+        if (lavaRb != null)
+        {
+            lavaRb.linearVelocity = shootDirection * 5f; // Change 5f to your desired speed
+        }
+
+        StartCoroutine(AttackTimer(attackTimer, lava));
     }
 
 

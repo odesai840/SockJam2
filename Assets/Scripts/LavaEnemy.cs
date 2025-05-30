@@ -92,7 +92,7 @@ public class LavaEnemy : MonoBehaviour
         CheckPlayerLocation();
         DeleteAllWaypoints(); // TESTING
         CheckCanSimplePathfind();
-        Debug.Log(moveSpeed);
+
         if (aistate == AIState.Chasing)                 // Chase Code
         {
 
@@ -431,7 +431,7 @@ public class LavaEnemy : MonoBehaviour
         // Move toward the current waypoint
         Vector2 moveDirection = (targetPosition - rb.position).normalized;
 
-        rb.MovePosition(rb.position + -moveDirection * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + -moveDirection * .10f * Time.fixedDeltaTime);
 
         // Check if the police AI reached the waypoint
         if (Vector2.Distance(rb.position, targetPosition) <= 0.2)
