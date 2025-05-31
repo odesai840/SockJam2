@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
     // attacks
     [Header("Attacks")]
     [SerializeField] private GameObject rangedProjectile;
+    [SerializeField] private GameObject kickCollider;
 
     // checkpoint
     [HideInInspector] public Checkpoint checkpoint;
@@ -66,13 +67,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        // testing death and checkpoints
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            TakeDamage(1);
-            Debug.Log("Current Health: " + currentHealth);
-        }
-
         if (currentHealth <= 0)
         {
             Death();
@@ -92,7 +86,7 @@ public class Player : MonoBehaviour
         {
             Debug.Log("KICK");
             animator.SetTrigger("kick");
-
+            kickCollider.GetComponent<CircleCollider2D>().enabled = true;
             
         }
         
@@ -111,7 +105,7 @@ public class Player : MonoBehaviour
             {
                 shurikenScript.Initialize(direction);
             }
-            Debug.DrawLine(shuriken.transform.position, shuriken.transform.position + direction * 5f, Color.red, 2f);
+            //Debug.DrawLine(shuriken.transform.position, shuriken.transform.position + direction * 5f, Color.red, 2f);
         }
 
         // dash

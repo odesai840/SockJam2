@@ -75,6 +75,87 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &496113161785503552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 923217144495447978}
+  - component: {fileID: 4759759994031325885}
+  - component: {fileID: 1599382171525585395}
+  m_Layer: 0
+  m_Name: KickCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &923217144495447978
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496113161785503552}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6666667, y: 0.6666667, z: 0.6666667}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1700908907217273258}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4759759994031325885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496113161785503552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 753951e46f320df42a07b4a62150dbe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!58 &1599382171525585395
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496113161785503552}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 1.25
 --- !u!1 &685798491220740218
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,6 +267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1700908907217273258}
+  - component: {fileID: 1818226292624978693}
   - component: {fileID: 3656318505120789198}
   - component: {fileID: 3607247854454633909}
   - component: {fileID: 1854683564654380571}
@@ -209,9 +291,23 @@ Transform:
   m_LocalPosition: {x: -4.56, y: -3.67, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 923217144495447978}
   m_Father: {fileID: 3382829801480986073}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1818226292624978693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423440432461433852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1964e666c9899d46be2facbf5a2ef24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kickCollider: {fileID: 496113161785503552}
 --- !u!212 &3656318505120789198
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -407,13 +503,14 @@ MonoBehaviour:
   camZAxis: -10
   camSpeed: 8
   maxHealth: 10
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 5963798819804704525}
   dashDistance: 500
   dashCooldown: 1
   dashDuration: 0.1
   dashShakeIntensity: 0.075
   dashShakeDuration: 0.1
   rangedProjectile: {fileID: 1609488975480095040, guid: ac91f8e30165f8f4395dd315248a2f10, type: 3}
+  kickCollider: {fileID: 496113161785503552}
   checkpoint: {fileID: 0}
 --- !u!1 &2854968992859747193
 GameObject:
