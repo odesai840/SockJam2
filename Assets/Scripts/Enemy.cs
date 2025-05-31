@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rb;
     private LineRenderer lineRenderer;
 
+    public float bucketHealth;
+
     Vector2 playerPosition;
     float distanceToPlayer;
     Vector2 dirToPlayer; // direction to player
@@ -67,7 +69,7 @@ public class Enemy : MonoBehaviour
     private Collider2D selfCollider;
 
     // TESTING
-    public GameObject waypointCircle;
+    //public GameObject waypointCircle;
     private List<GameObject> waypointObjects = new List<GameObject>();
 
     void Start()
@@ -107,20 +109,23 @@ public class Enemy : MonoBehaviour
                 Pathfind();
             }
 
+
         }
-        else if (aistate == AIState.Attacking)        // Attack Code
+        else if (aistate == AIState.Attacking && canAttack)        // Attack Code
         {
             moveSpeed = 0;
 
-            if (canAttack)
-            {
+           
                 if (!isAttacking)
                 {
-                    // Trigger actual attack here
+                // Trigger actual attack here
+
+                    Debug.Log("Using Attack");
                     UseAttack();
+                    canAttack = false;
                     StartCoroutine(WaitforAttackAnimation(attackLengthInSeconds));
                 }
-            }
+           
         }
         else if (aistate == AIState.Fleeing)          // Flee Code
         {
@@ -263,15 +268,16 @@ public class Enemy : MonoBehaviour
         // Move toward the current waypoint
         Vector2 moveDirection = (targetPosition - rb.position).normalized;
 
-        if (Vector2.Distance(rb.transform.position, player.transform.position) < stopDistanceFromPlayer)
+        if (Vector2.Distance(rb.transform.position, player.transform.position) > stopDistanceFromPlayer)
         {
-            rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
+            rb.MovePosition(rb.position + moveDirection * .35f * Time.fixedDeltaTime);
         }
 
     }
 
     private void Pathfind()
     {
+        currentWaypointIndex = 0;
         wayPoints.Clear(); // Clear the list of waypoints
 
         int wayPointsNeeded = (int)(distanceToPlayer / rayCastDistance); // Number of waypoints needed
@@ -354,8 +360,8 @@ public class Enemy : MonoBehaviour
                 if (foundClearPath)
                 {
                     //wayPoints.Add(rayCastEndpoint); //Moved up into individual else ifs
-                    GameObject waypoint = Instantiate(waypointCircle, rayCastEndpoint, Quaternion.identity);
-                    waypointObjects.Add(waypoint);
+                    //GameObject waypoint = Instantiate(waypointCircle, rayCastEndpoint, Quaternion.identity);
+                    //waypointObjects.Add(waypoint);
                 }
             }
             //Debug.Log("Way Point #" + (wayPoints.Count-1));
@@ -417,6 +423,7 @@ public class Enemy : MonoBehaviour
 
     private void Flee()
     {
+        currentWaypointIndex = 0;
         Pathfind();
         MoveAlongWaypointsOpposite();
     }
@@ -441,4 +448,16 @@ public class Enemy : MonoBehaviour
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///
+
+
+    public void TakeDamage(int damage)
+    {
+        bucketHealth -= damage;
+
+        if (bucketHealth < 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }

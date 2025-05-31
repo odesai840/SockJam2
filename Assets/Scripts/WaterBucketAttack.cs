@@ -145,7 +145,8 @@ public class WaterBucketAttack : MonoBehaviour
     {
         yield return new WaitForSeconds(fade);
         Destroy(water);
-        phase = AttackPhase.Fade;
+        phase = AttackPhase.None;
+
     }
 
 }

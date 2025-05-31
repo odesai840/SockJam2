@@ -132,20 +132,20 @@ public class LavaBucketAttack : MonoBehaviour
         // Base angle towards player
         float baseAngle = Mathf.Atan2(startDirectionToPlayer.y, startDirectionToPlayer.x) * Mathf.Rad2Deg;
 
-        // Add a ±20 degree offset
-        float offsetAngle = baseAngle + Random.Range(35f, 35f);
 
-        // Convert offset angle back to a direction
+        float offsetAngle = baseAngle + Random.Range(25f, 25f);
+
+
         Vector2 shootDirection = new Vector2(Mathf.Cos(offsetAngle * Mathf.Deg2Rad), Mathf.Sin(offsetAngle * Mathf.Deg2Rad));
 
-        // Spawn the lava with the correct rotation
+
         lava = Instantiate(lavaBeam, lavaSpawnPoint, Quaternion.Euler(0, 0, offsetAngle + 180));
 
-        // Apply velocity if using Rigidbody2D
+
         Rigidbody2D lavaRb = lava.GetComponent<Rigidbody2D>();
         if (lavaRb != null)
         {
-            lavaRb.linearVelocity = shootDirection * 5f; // Change 5f to your desired speed
+            //lavaRb.linearVelocity = shootDirection * 5f; // Change 5f to your desired speed
         }
 
         StartCoroutine(AttackTimer(attackTimer, lava));

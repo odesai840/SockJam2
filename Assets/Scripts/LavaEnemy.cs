@@ -13,6 +13,8 @@ public class LavaEnemy : MonoBehaviour
     private Rigidbody2D rb;
     private LineRenderer lineRenderer;
 
+    public float bucketHealth;
+
     Vector2 playerPosition;
     float distanceToPlayer;
     Vector2 dirToPlayer; // direction to player
@@ -67,7 +69,7 @@ public class LavaEnemy : MonoBehaviour
     private Collider2D selfCollider;
 
     // TESTING
-    public GameObject waypointCircle;
+    //public GameObject waypointCircle;
     private List<GameObject> waypointObjects = new List<GameObject>();
 
     void Start()
@@ -266,7 +268,7 @@ public class LavaEnemy : MonoBehaviour
 
         if (Vector2.Distance(rb.transform.position, player.transform.position) < stopDistanceFromPlayer)
         {
-            rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
+            rb.MovePosition(rb.position + moveDirection * .35f * Time.fixedDeltaTime);
         }
 
     }
@@ -355,8 +357,8 @@ public class LavaEnemy : MonoBehaviour
                 if (foundClearPath)
                 {
                     //wayPoints.Add(rayCastEndpoint); //Moved up into individual else ifs
-                    GameObject waypoint = Instantiate(waypointCircle, rayCastEndpoint, Quaternion.identity);
-                    waypointObjects.Add(waypoint);
+                    //GameObject waypoint = Instantiate(waypointCircle, rayCastEndpoint, Quaternion.identity);
+                    //waypointObjects.Add(waypoint);
                 }
             }
             //Debug.Log("Way Point #" + (wayPoints.Count-1));

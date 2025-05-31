@@ -58137,7 +58137,6 @@ MonoBehaviour:
   fleeTimer: 8
   stopDistanceFromPlayer: 1.5
   moveSpeed: 2.5
-  waypointCircle: {fileID: 2842062414124853007, guid: 615a448e139c5194bb6e4edcbf6e465d, type: 3}
 --- !u!120 &998246238
 LineRenderer:
   serializedVersion: 2

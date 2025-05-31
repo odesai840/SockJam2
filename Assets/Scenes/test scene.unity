@@ -266,7 +266,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -835,6 +835,7 @@ MonoBehaviour:
   camZAxis: -10
   camSpeed: 4
   maxHealth: 10
+  healthBar: {fileID: 0}
   dashDistance: 350
   dashCooldown: 1
   dashDuration: 0.1
@@ -2735,7 +2736,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 849dd129dfda0a34b964e06ad2154a2c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4509,7 +4510,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &4782523832919882237
+--- !u!1001 &1992885948
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -4523,11 +4524,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6631059255904043950, guid: 57ab5dd7556d48f4fa3dbc1c62ce141d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.03
+      value: 0.9834937
       objectReference: {fileID: 0}
     - target: {fileID: 6631059255904043950, guid: 57ab5dd7556d48f4fa3dbc1c62ce141d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.55
+      value: -2.546672
       objectReference: {fileID: 0}
     - target: {fileID: 6631059255904043950, guid: 57ab5dd7556d48f4fa3dbc1c62ce141d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4574,4 +4575,4 @@ SceneRoots:
   - {fileID: 641847905}
   - {fileID: 488884663}
   - {fileID: 971361367}
-  - {fileID: 4782523832919882237}
+  - {fileID: 1992885948}

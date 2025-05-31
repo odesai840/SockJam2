@@ -92,6 +92,8 @@ public class Player : MonoBehaviour
         {
             Debug.Log("KICK");
             animator.SetTrigger("kick");
+
+            
         }
         
         // ranged attack
