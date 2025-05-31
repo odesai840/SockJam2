@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     [Header("Health")]
     public int maxHealth = 10;
     private int currentHealth;
+    public RectTransform healthBar;
 
     // dash 
     [Header("Dash")]
@@ -152,6 +153,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        healthBar.sizeDelta = new Vector2(currentHealth * 70f, healthBar.sizeDelta.y);
     }
 
     void Death()
@@ -159,6 +161,7 @@ public class Player : MonoBehaviour
         Debug.Log("DIED");
         player.position = checkpoint.transform.position;
         currentHealth = maxHealth;
+        healthBar.sizeDelta = new Vector2(currentHealth * 70f, healthBar.sizeDelta.y);
     }
 
     IEnumerator WaitForDashEnd(float duration)

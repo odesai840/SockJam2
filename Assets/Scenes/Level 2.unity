@@ -36446,6 +36446,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerContainer
       objectReference: {fileID: 0}
+    - target: {fileID: 2063649632344495009, guid: 4d1eb0b414a72cc458f9c73e7ff8ccfd, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 1428317660}
     - target: {fileID: 3382829801480986073, guid: 4d1eb0b414a72cc458f9c73e7ff8ccfd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.45586
@@ -95263,6 +95267,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!224 &1428317660 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5963798819804704525, guid: 4d1eb0b414a72cc458f9c73e7ff8ccfd, type: 3}
+  m_PrefabInstance: {fileID: 1051884697}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1506040336
 PrefabInstance:
   m_ObjectHideFlags: 0
